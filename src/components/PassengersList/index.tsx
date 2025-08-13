@@ -5,7 +5,7 @@ import { Wrapper } from "@src/components/Wrapper";
 
 import { PassengerCard } from "@src/components/PassengerCard/";
 import "./PassengersList.scss";
-const ITEMS_PER_LOAD = 5;
+const ITEMS_PER_LOAD = 10;
 
 export function PassengersList() {
   const { passengers, filters, setPassengers, setFilter } = usePassengers();
@@ -13,7 +13,9 @@ export function PassengersList() {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/altkraft/for-applicants/master/frontend/titanic/passengers.json")
+    fetch(
+      "https://raw.githubusercontent.com/altkraft/for-applicants/master/frontend/titanic/passengers.json"
+    )
       .then((res) => res.json())
       .then((data) => setPassengers(data));
   }, [setPassengers]);
@@ -30,7 +32,10 @@ export function PassengersList() {
   }, []);
 
   const filteredPassengers = passengers.filter((p) => {
-    if (filters.name && !p.name.toLowerCase().includes(filters.name.toLowerCase())) {
+    if (
+      filters.name &&
+      !p.name.toLowerCase().includes(filters.name.toLowerCase())
+    ) {
       return false;
     }
     if (filters.class && p.class !== filters.class) {
@@ -53,6 +58,7 @@ export function PassengersList() {
 
       <Wrapper>
         <input
+          name="name"
           type="text"
           placeholder="Search by name"
           value={filters.name}
@@ -63,6 +69,7 @@ export function PassengersList() {
         />
 
         <select
+          name="class"
           value={filters.class}
           onChange={(e) => {
             setFilter("class", e.target.value);
@@ -76,6 +83,7 @@ export function PassengersList() {
         </select>
 
         <select
+          name="gender"
           value={filters.gender}
           onChange={(e) => {
             setFilter("gender", e.target.value);
@@ -89,6 +97,7 @@ export function PassengersList() {
 
         <label>
           <input
+            name="survivedOnly"
             type="checkbox"
             checked={filters.survivedOnly}
             onChange={(e) => {
