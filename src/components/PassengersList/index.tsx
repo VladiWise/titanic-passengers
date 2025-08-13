@@ -1,20 +1,19 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import { usePassengers } from "../store/usePassagers"; 
+import { usePassengers } from "@src/store/usePassagers";
+import { Wrapper } from "@src/components/Wrapper";
 
-import "./PassengerCard.scss"
-const ITEMS_PER_LOAD = 40;
+import { PassengerCard } from "@src/components/PassengerCard/";
+import "./PassengersList.scss";
+const ITEMS_PER_LOAD = 5;
 
 export function PassengersList() {
   const { passengers, filters, setPassengers, setFilter } = usePassengers();
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  // Загрузка данных
   useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/altkraft/for-applicants/master/frontend/titanic/passengers.json"
-    )
+    fetch("https://raw.githubusercontent.com/altkraft/for-applicants/master/frontend/titanic/passengers.json")
       .then((res) => res.json())
       .then((data) => setPassengers(data));
   }, [setPassengers]);
@@ -30,7 +29,6 @@ export function PassengersList() {
     return () => observer.disconnect();
   }, []);
 
-  // Фильтрация
   const filteredPassengers = passengers.filter((p) => {
     if (filters.name && !p.name.toLowerCase().includes(filters.name.toLowerCase())) {
       return false;
@@ -53,8 +51,7 @@ export function PassengersList() {
     <div>
       <h1>Passengers</h1>
 
-      {/* Фильтры */}
-      <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+      <Wrapper>
         <input
           type="text"
           placeholder="Search by name"
@@ -88,7 +85,6 @@ export function PassengersList() {
           <option value="">All genders</option>
           <option value="female">female</option>
           <option value="male">male</option>
-
         </select>
 
         <label>
@@ -102,25 +98,13 @@ export function PassengersList() {
           />
           Only survived
         </label>
-      </div>
+      </Wrapper>
 
-      {/* Таблица */}
-      <div style={{display: "flex", flexDirection: "column", gap:"1rem"}}>
-    
-
-          {visiblePassengers.map((p) => (
-            <div key={p.id} className="passenger-card-container">
-              
-              <p>{p.name}</p>
-              <p>{p.class}</p>
-              <p>{p.survived ? "Yes" : "No"}</p>
-              <p>{p.age}</p>
-            </div>
-          ))}
- 
-
-
-      </div>
+      <Wrapper>
+        {visiblePassengers.map((p) => (
+          <PassengerCard key={p.id} passenger={p} />
+        ))}
+      </Wrapper>
 
       <div ref={loadMoreRef} style={{ height: "20px" }}></div>
     </div>
