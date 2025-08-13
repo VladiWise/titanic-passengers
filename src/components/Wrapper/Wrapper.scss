@@ -1,8 +1,11 @@
 .wrapper {
+  max-width: max-content;
+  min-width: min-content;
   display: flex;
-
   flex-direction: column;
   padding: 1rem;
   background-color: white;
   border-radius: 1rem;
+  
+  
 }
