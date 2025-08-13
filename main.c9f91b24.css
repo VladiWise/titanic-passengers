@@ -1,0 +1,4 @@
+*{margin:0;padding:0;font-family:"Inter",sans-serif}.container{background-color:rgba(229,231,235,.534);padding:1rem}
+.wrapper{display:flex;flex-direction:column;padding:1rem;background-color:#fff;border-radius:1rem}
+.passenger-card{display:flex;align-items:center;justify-content:space-between;padding:.75rem .25rem;gap:.25rem;border-bottom:1px solid #e5e7eb}.passenger-card-main{display:flex;align-items:center;justify-content:flex-start;gap:.75rem}.passenger-card-info{display:flex;flex-direction:column;gap:.25rem}.flex-end{align-items:flex-end;text-align:end}.text-gray-400{color:#9ca3af;font-size:.875rem}.text-gray-500{color:#6b7280;font-size:.875rem}
+
