@@ -4,6 +4,7 @@ import { usePassengers } from "@src/store/usePassagers";
 import { Wrapper } from "@src/components/Wrapper";
 
 import { PassengerCard } from "@src/components/PassengerCard/";
+import { PassengerSearch } from "@src/components/PassengerSearch/";
 import "./PassengersList.scss";
 const ITEMS_PER_LOAD = 10;
 
@@ -56,58 +57,7 @@ export function PassengersList() {
     <div>
       <h1>Passengers</h1>
 
-      <Wrapper>
-        <input
-          name="name"
-          type="text"
-          placeholder="Search by name"
-          value={filters.name}
-          onChange={(e) => {
-            setFilter("name", e.target.value);
-            setVisibleCount(ITEMS_PER_LOAD);
-          }}
-        />
-
-        <select
-          name="class"
-          value={filters.class}
-          onChange={(e) => {
-            setFilter("class", e.target.value);
-            setVisibleCount(ITEMS_PER_LOAD);
-          }}
-        >
-          <option value="">All classes</option>
-          <option value="1">1st</option>
-          <option value="2">2nd</option>
-          <option value="3">3rd</option>
-        </select>
-
-        <select
-          name="gender"
-          value={filters.gender}
-          onChange={(e) => {
-            setFilter("gender", e.target.value);
-            setVisibleCount(ITEMS_PER_LOAD);
-          }}
-        >
-          <option value="">All genders</option>
-          <option value="female">female</option>
-          <option value="male">male</option>
-        </select>
-
-        <label>
-          <input
-            name="survivedOnly"
-            type="checkbox"
-            checked={filters.survivedOnly}
-            onChange={(e) => {
-              setFilter("survivedOnly", e.target.checked);
-              setVisibleCount(ITEMS_PER_LOAD);
-            }}
-          />
-          Only survived
-        </label>
-      </Wrapper>
+      <PassengerSearch itemsPerLoad={ITEMS_PER_LOAD} setVisibleCount={setVisibleCount} />
 
       <Wrapper>
         {visiblePassengers.map((p) => (
