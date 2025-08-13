@@ -1,4 +1,4 @@
-@use "../../variables" as *;
+@use "../../styles/variables" as *;
 
 @mixin flex-center($justify: flex-start) {
   display: flex;
