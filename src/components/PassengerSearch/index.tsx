@@ -1,6 +1,7 @@
 import React from "react";
 import { usePassengers } from "@src/store/usePassagers";
-import { Wrapper } from "@src/components/Wrapper";
+
+import "./PassengerSearch.scss";
 
 export function PassengerSearch({
   setVisibleCount,
@@ -20,8 +21,9 @@ export function PassengerSearch({
   };
 
   return (
-    <section>
+    <section className="passenger-search">
       <input
+        className="passenger-search-input"
         name="name"
         type="text"
         placeholder="Search by name"
@@ -30,6 +32,7 @@ export function PassengerSearch({
       />
 
       <select
+        className="passenger-search-input"
         name="class"
         value={filters.class}
         onChange={(e) => handleChange("class", e.target.value)}
@@ -41,6 +44,7 @@ export function PassengerSearch({
       </select>
 
       <select
+        className="passenger-search-input"
         name="gender"
         value={filters.gender}
         onChange={(e) => handleChange("gender", e.target.value)}
@@ -50,8 +54,9 @@ export function PassengerSearch({
         <option value="male">male</option>
       </select>
 
-      <label>
+      <label className="passenger-search-checkbox-label">
         <input
+          className="passenger-search-checkbox"
           name="survivedOnly"
           type="checkbox"
           checked={filters.survivedOnly}

@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding-top: 5rem;
+  padding-top: 6rem;
 
   max-width: 500px;
 
@@ -12,14 +12,21 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 5rem;
+    height: 6rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fff;
-
+    gap: 0.5rem;
     border-bottom: 1px solid rgb(229 231 235);
 
+    @media (max-width: 640px) {
+      height: 11rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    padding-top: 11rem;
   }
 }
