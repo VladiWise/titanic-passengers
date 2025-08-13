@@ -1,6 +1,16 @@
 import React from "react";
 import "./Wrapper.scss";
 
-export function Wrapper({ children }: { children: React.ReactNode }) {
-  return <div className="wrapper">{children}</div>;
+export function Wrapper({
+  children,
+  style,
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <div className="wrapper" style={style}>
+      {children}
+    </div>
+  );
 }

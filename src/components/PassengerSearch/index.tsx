@@ -20,7 +20,7 @@ export function PassengerSearch({
   };
 
   return (
-    <Wrapper>
+    <section>
       <input
         name="name"
         type="text"
@@ -59,6 +59,6 @@ export function PassengerSearch({
         />
         Only survived
       </label>
-    </Wrapper>
+    </section>
   );
 }

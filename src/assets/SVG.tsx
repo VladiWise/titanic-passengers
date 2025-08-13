@@ -2,6 +2,8 @@ import React from "react";
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {}
 
+
+
 export const MaleIcon: React.FC<IconProps> = (props) => (
   <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="192" height="512" viewBox="0 0 192 512" {...props}>

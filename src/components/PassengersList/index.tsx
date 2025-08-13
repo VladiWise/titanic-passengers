@@ -12,13 +12,10 @@ export function PassengersList() {
   const { passengers, filters, setPassengers, setFilter } = usePassengers();
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/altkraft/for-applicants/master/frontend/titanic/passengers.json"
-    )
-      .then((res) => res.json())
-      .then((data) => setPassengers(data));
+    loadPassengers();
   }, [setPassengers]);
 
   // Infinite scroll
@@ -54,18 +51,41 @@ export function PassengersList() {
   const visiblePassengers = filteredPassengers.slice(0, visibleCount);
 
   return (
-    <div>
-      <h1>Passengers</h1>
+    <div className="passengers-list">
 
-      <PassengerSearch itemsPerLoad={ITEMS_PER_LOAD} setVisibleCount={setVisibleCount} />
+      <section className="passengers-list-header">
+        <h1>Passengers</h1>
+        <PassengerSearch
+          itemsPerLoad={ITEMS_PER_LOAD}
+          setVisibleCount={setVisibleCount}
+        />
+      </section>
 
-      <Wrapper>
-        {visiblePassengers.map((p) => (
-          <PassengerCard key={p.id} passenger={p} />
-        ))}
-      </Wrapper>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <Wrapper>
+          {visiblePassengers.length === 0 && <p>No passengers found</p>}
+
+          {visiblePassengers.map((p) => (
+            <PassengerCard key={p.id} passenger={p} />
+          ))}
+        </Wrapper>
+      )}
 
       <div ref={loadMoreRef} style={{ height: "20px" }}></div>
     </div>
   );
+
+  async function loadPassengers() {
+    const res = await fetch(
+      "https://raw.githubusercontent.com/altkraft/for-applicants/master/frontend/titanic/passengers.json"
+    );
+    const data = await res.json();
+
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    setPassengers(data);
+
+    setIsLoading(false);
+  }
 }
